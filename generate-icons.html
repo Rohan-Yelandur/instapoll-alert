@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Generate Icons</title>
+</head>
+
+<body>
+    <p>Right-click each image below and "Save image as" to the icons/ folder:</p>
+    <canvas id="c128" width="128" height="128"></canvas>
+    <canvas id="c48" width="48" height="48"></canvas>
+    <canvas id="c16" width="16" height="16"></canvas>
+    <script>
+        function drawIcon(canvas) {
+            const ctx = canvas.getContext('2d');
+            const s = canvas.width;
+            const p = s * 0.1; // padding
+
+            // Background rounded rect
+            const r = s * 0.18;
+            ctx.beginPath();
+            ctx.roundRect(0, 0, s, s, r);
+            ctx.fillStyle = '#1a1a2e';
+            ctx.fill();
+
+            // Bar chart
+            const barW = s * 0.12;
+            const gap = s * 0.06;
+            const baseY = s * 0.72;
+            const startX = s * 0.18;
+
+            const bars = [
+                { h: s * 0.2, color: '#bf5700' },
+                { h: s * 0.35, color: '#d4700a' },
+                { h: s * 0.5, color: '#bf5700' },
+            ];
+
+            bars.forEach((bar, i) => {
+                const x = startX + i * (barW + gap);
+                const y = baseY - bar.h;
+                ctx.beginPath();
+                ctx.roundRect(x, y, barW, bar.h, s * 0.03);
+                ctx.fillStyle = bar.color;
+                ctx.fill();
+            });
+
+            // Bell icon (right side)
+            const bellX = s * 0.68;
+            const bellY = s * 0.2;
+            const bellSize = s * 0.28;
+
+            ctx.save();
+            ctx.translate(bellX, bellY);
+            ctx.scale(bellSize / 24, bellSize / 24);
+
+            // Bell shape
+            ctx.beginPath();
+            ctx.fillStyle = '#f59e0b';
+            // Bell body
+            ctx.moveTo(12, 2);
+            ctx.bezierCurveTo(12, 2, 12, 2, 12, 2);
+            ctx.arc(12, 2, 1.5, 0, Math.PI * 2); // top dot
+            ctx.fill();
+
+            ctx.beginPath();
+            ctx.moveTo(5, 17);
+            ctx.lineTo(19, 17);
+            ctx.lineTo(18, 14);
+            ctx.bezierCurveTo(17, 12, 17, 9, 17, 8);
+            ctx.bezierCurveTo(17, 5.24, 14.76, 3, 12, 3);
+            ctx.bezierCurveTo(9.24, 3, 7, 5.24, 7, 8);
+            ctx.bezierCurveTo(7, 9, 7, 12, 6, 14);
+            ctx.closePath();
+            ctx.fillStyle = '#f59e0b';
+            ctx.fill();
+
+            // Bell bottom
+            ctx.beginPath();
+            ctx.arc(12, 19, 2.5, 0, Math.PI, false);
+            ctx.fillStyle = '#f59e0b';
+            ctx.fill();
+
+            // Notification dot
+            ctx.beginPath();
+            ctx.arc(18, 5, 3.5, 0, Math.PI * 2);
+            ctx.fillStyle = '#ef4444';
+            ctx.fill();
+            ctx.strokeStyle = '#1a1a2e';
+            ctx.lineWidth = 1.5;
+            ctx.stroke();
+
+            ctx.restore();
+        }
+
+        drawIcon(document.getElementById('c128'));
+        drawIcon(document.getElementById('c48'));
+        drawIcon(document.getElementById('c16'));
+
+        // Provide download links
+        [128, 48, 16].forEach(size => {
+            const canvas = document.getElementById('c' + size);
+            const link = document.createElement('a');
+            link.download = `icon${size}.png`;
+            link.href = canvas.toDataURL('image/png');
+            link.textContent = `Download icon${size}.png`;
+            link.style.display = 'block';
+            link.style.margin = '10px';
+            document.body.appendChild(link);
+        });
+    </script>
+</body>
+
+</html>

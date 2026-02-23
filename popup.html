@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>InstaPoll Alert</title>
+    <link rel="stylesheet" href="popup.css">
+</head>
+
+<body>
+    <div class="popup">
+        <!-- Header -->
+        <div class="header">
+            <div class="logo-row">
+                <div class="logo-icon">📊</div>
+                <div>
+                    <h1>InstaPoll Alert</h1>
+                    <p class="subtitle">UT Austin Poll Notifier</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Status Card -->
+        <div class="card status-card" id="status-card">
+            <div class="status-row">
+                <div class="status-indicator" id="status-dot"></div>
+                <div class="status-text">
+                    <span class="status-label" id="status-label">Checking...</span>
+                    <span class="status-detail" id="status-detail"></span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Stop Alert Button (hidden by default, shown when alerting) -->
+        <button class="stop-alert-btn hidden" id="stop-alert-btn">
+            <span class="stop-icon">🔇</span>
+            <span class="stop-text">STOP ALERT</span>
+        </button>
+
+        <!-- Settings Card -->
+        <div class="card settings-card">
+            <div class="setting-row">
+                <div class="setting-info">
+                    <span class="setting-icon">🔔</span>
+                    <span class="setting-label">Desktop Notifications</span>
+                </div>
+                <label class="toggle">
+                    <input type="checkbox" id="toggle-notifications" checked>
+                    <span class="toggle-slider"></span>
+                </label>
+            </div>
+            <div class="divider"></div>
+            <div class="setting-row">
+                <div class="setting-info">
+                    <span class="setting-icon">🔊</span>
+                    <span class="setting-label">Sound Alert</span>
+                </div>
+                <label class="toggle">
+                    <input type="checkbox" id="toggle-sound" checked>
+                    <span class="toggle-slider"></span>
+                </label>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <div class="footer">
+            <span class="footer-text">Watching polls.la.utexas.edu</span>
+        </div>
+    </div>
+
+    <script src="popup.js"></script>
+</body>
+
+</html>
